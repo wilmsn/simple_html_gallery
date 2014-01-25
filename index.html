@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<link rel='stylesheet' type='text/css' href='/css/styles.css'>
+	<link rel='stylesheet' type='text/css' href='/css/styles_menu.css'>
+        <link rel="stylesheet" type="text/css" href="/css/styles_jc.css">
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+<script> 
+$(document).ready(function(){
+  getcontent('/main.html');
+}); 
+function showgallery(mygallery) {
+//  alert(window.navigator.appName);
+  $.get('/gallery.php',{dir: mygallery}, function(data) { 
+     $('#Content').hide();
+     $('#Content').html(data); 
+     $('#Content').show();
+});
+}
+function getcontent(mypage) {
+//  alert(window.navigator.appName);
+  $.get(mypage, function(data) { 
+     $('#Content').hide();
+     $('#Content').html(data); 
+     $('#Content').show();
+});
+}
+function openwindow (mypage,titel,parameter) {
+  MeinFenster = window.open(mypage,titel,parameter);
+  MeinFenster.focus();
+}
+function openiframe(mypage) {
+     fheight=screen.height-300;
+     framedata='<iframe src="'+mypage+'" width="100%" height="'+fheight+'" name="IFRAME"></iframe>';
+     $('#Content').hide();
+     $('#Content').html(framedata); 
+     $('#Content').show();
+}
+</script>
+</head>
+<body>
+
+    <a href='#' onclick="showgallery('testdir');">Click me</a>
+
+<br>
+
+</div>
+<div id="Content">
+
+</div>
+</div>
+</body>
+</html>

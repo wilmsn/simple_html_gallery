@@ -37,3 +37,4 @@ The gallery will be activated by clicking on a link or a button, use this code f
 Where "mygallery" is the name of the folder containing the pictures.
 
 If you just want to start it put all the file in the documentroot of your webserver.
+

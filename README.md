@@ -26,13 +26,13 @@ Remember it is just a very basic sceleton.
 
 How it works:
 Inside your html file you put this:
-<div id="Content">
-</div>
+&lt;div id="Content"&gt;
+&lt;/div&gt;
 
 Between this tags your gallery will been shown.
 The gallery will be activated by clicking on a link or a button, use this code for it:
 
-<a href='#' onclick="showgallery('mygallery');">
+&lt;a href='#' onclick="showgallery('mygallery');"&gt;
 
 Where "mygallery" is the name of the folder containing the pictures.
 

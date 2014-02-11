@@ -17,11 +17,9 @@ Like this:
 ...
 /gallery/base/dir/galleryN
 
-get and install jcarousel from http://sorgalla.com/jcarousel/
-
 Todo:
 Change the "gallery.php" to your needs.
-Minimum is to set the "$webserverbasedir" to the documentroot of your webserver and to set the "$gallerybasedir" to the basedir of your galleries.
+Minimum is to set the "$basedir" to the UNIX-basedir of the galleries and to set the "$htmlprefix" to the HTML-basedir of your galleries.
 
 Change the "index.html" to your needs.
 Remember it is just a very basic sceleton.

@@ -1,53 +1,77 @@
 <?php
 #
-# Just enter you directories starting with a slash and ending without slash !!
+# Change this part to your individual configuration
 #
-#$webserverbasedir="/base/dir/of/your/webserver";
-$webserverbasedir="/base/dir/of/your/webserver";
-#$gallerybasedir="/basedir/of/your/galleries";
-$gallerybasedir="/basedir/of/your/galleries";
-$name_photographer="Mister Nobody";
-$homepage_photographer="www.your_homepage.com";
-$myheadlinefile="text.txt";
-$my_arrow_left="/arrow_left.gif";
-$my_arrow_right="/arrow_right.gif";
+$exclude_list = array(".", "..", "text.txt");
+# "dir" will contain the gallery
+$mygallery=$_GET["dir"];
+# this is the unix basedir of all the galleries
+$basedir="/home/norbert/www/bilder/";
+# the dir of the galleries as seen from the werbserver
+$htmlprefix="/bilder/";
+# $mytext contains the headline from the file "text.txt"
+$mytext = file_get_contents("$basedir$mygallery/text.txt");
 #
-# No configurable items below !!!
+# No configuration below this
 #
 ?>
-<!doctype html>
-<html lang="de">
-    <head>
-        <link rel="stylesheet" type="text/css" href="/css/styles_jc.css">
-        <script type="text/javascript" src="http://sorgalla.com/jcarousel/dist/jquery.jcarousel.min.js"></script>
-        <script type="text/javascript" src="http://sorgalla.com/jcarousel/examples/basic/jcarousel.basic.js"></script>
-	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-    </head>
-    <body>
-       <h1><center>
+
+<script type="text/javascript">
+bilder = new Array(
 <?php
-$exclude_list = array(".", "..", "$myheadlinefile");
-$mygallery=$_GET["dir"];
-$htmlprefix=" <li><img src='$gallerybasedir/";
-$htmlpostfix="' width='600' height='450' alt=''></li>";
-$mytext = file_get_contents("$webserverbasedir$gallerybasedir/$mygallery/$myheadlinefile");
-echo "$mytext";
-echo "</center></h1><div class='wrapper'><div class='jcarousel-wrapper'><div class='jcarousel'><ul>\n";
-$myfiles = array_diff(scandir("$webserverbasedir$gallerybasedir/$mygallery"), $exclude_list);
+$myfiles = array_diff(scandir("$basedir$mygallery"), $exclude_list);
+$i=0;
 foreach($myfiles as $thisfile) {
-   echo "$htmlprefix$mygallery/$thisfile$htmlpostfix\n";
+   if ( $i > 0) { echo ","; }
+   echo "'$htmlprefix$mygallery/$thisfile' ";
+   $i++;
 }
 ?>
-                    </ul>
-                </div>
-             <p class="photo-credits">
-                <?php echo " Fotos: <a href='http://$homepage_photographer'>$name_photographer</a> "?>
-             </p>
-             <a href="#" class="jcarousel-control-prev"><img src=<?php echo "$my_arrow_left"; ?>></a>
-             <a href="#" class="jcarousel-control-next"><img src=<?php echo "$my_arrow_right"; ?>></a>                
-           </div>
-        </div>
-    </body>
-</html>
 
+);
+<?php echo "var headline='<div id=Galleryhead><center>$mytext</center></div>'; "; ?>
+var aktbildno=0;
+var aktbild = bilder[aktbildno];
+$(function(){
+  $('#Content').html(headline+'<div id=Gallery></div><div id=Gallerybuffer style="display: none;"></div>');
+  $('#Gallerybuffer').hide();
+  showpic();
+});
+function nextpic(){
+  if (aktbildno < bilder.length -1) {
+    aktbildno++;
+  }
+  showpic();
+}
+function prevpic(){
+  if ( aktbildno > 0 ) {
+    aktbildno--;
+  }
+  showpic();
+}
+function showpic(){
+  var htmlstr='<center><table><tr><td></td>';
+  htmlstr=htmlstr+'<td rowspan=3><img src='+bilder[aktbildno]+' class=bild></td><td></td></tr>';
+  htmlstr=htmlstr+'<tr><td>';
+  if ( aktbildno > 0 ) {
+    htmlstr=htmlstr+'<a href="#" onclick="prevpic()" class="ctl-l"><img src=/img/arrow_left.gif></a>';
+  } else {
+    htmlstr=htmlstr+'<img src=/img/arrow_left_e.gif>';
+  }
+  htmlstr=htmlstr+'</td><td></td><td>';
+  if (aktbildno < bilder.length -1) {
+    htmlstr=htmlstr+'<a href="#" onclick="nextpic()"><img src=/img/arrow_right.gif></a>';
+  } else {
+    htmlstr=htmlstr+'<img src=/img/arrow_right_e.gif>';
+  }
+  htmlstr=htmlstr+'</td></tr><td></td><td></td><td></td></tr></table></center>';
+  var htmlbufstr='';
+  if (aktbildno < bilder.length -1) {
+    htmlbufstr='<img src='+bilder[aktbildno+1]+' width=1 height=1>';
+  }
+  $('#Gallery').hide();
+  $('#Gallery').html(htmlstr);
+  $('#Gallery').show();
+  $('#Gallerybuffer').html(htmlbufstr);
+}
 

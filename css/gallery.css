@@ -1,0 +1,36 @@
+.bild {
+    border: 10px solid #fff;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-box-shadow: 0 0 2px #999;
+       -moz-box-shadow: 0 0 2px #999;
+            box-shadow: 0 0 2px #999;
+}
+
+div#Gallery {
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+}
+
+div#Galleryhead {
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 45px;
+    width: 100%;
+    font-family: Arial; 
+    font-size:150%; 
+    color:#ffff00;
+}
+
+div#Gallerybuffer {
+    height: 1px;
+    left: 500px;
+    position: absolute;
+    top: 300px;
+    width: 1px;
+}

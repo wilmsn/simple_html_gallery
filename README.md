@@ -1,13 +1,16 @@
-This is just a very basic and easy to use gallery for your homepage.
+This is Version 1.0 of my simple HTML gallery. 
+Feel free to use this gallery for your homepage.
 
-Main advantage:
+Features:
+- Full screen mode (also on mobile devices)
+- preview from nest and previous picture
 - just put all the files of your gallery in one directory
 - if you want a headline just fill one file with it (default: text.txt)
 - let the script generate the rest for you!
 - implement it in your homepage and load it via javascript
 
 Basic requirements:
-- a server with PHP installed and useable in the webserver
+- a server with PHP installed and useable inside the webserver
 
 - only one basedirectory for all your galleries
 - one subdirectory for every gallery
@@ -26,7 +29,7 @@ Remember it is just a very basic sceleton.
 
 How it works:
 Inside your html file you put this:
-&lt;div id="Content"&gt;
+&lt;div id="content"&gt;
 &lt;/div&gt;
 
 Between this tags your gallery will been shown.

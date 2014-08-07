@@ -16,10 +16,10 @@ Feel free to use this gallery for your homepage.
 - only one basedirectory for all your galleries
 - one subdirectory for every gallery
 Like this:
--- /gallery/base/dir/gallery1
--- /gallery/base/dir/gallery2
--- ...
--- /gallery/base/dir/galleryN
+   /gallery/base/dir/gallery1
+   /gallery/base/dir/gallery2
+   ...
+   /gallery/base/dir/galleryN
 
 ## Install it:
 The easy way: 

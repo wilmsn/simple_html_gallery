@@ -15,11 +15,14 @@ Basic requirements:
 - only one basedirectory for all your galleries
 - one subdirectory for every gallery
 Like this:
-/gallery/base/dir/gallery1
-/gallery/base/dir/gallery2
-...
-/gallery/base/dir/galleryN
+ /gallery/base/dir/gallery1
+ /gallery/base/dir/gallery2
+ ...
+ /gallery/base/dir/galleryN
 
+Install it:
+The easy way: Just put all the files in the root of your webserver.
+ 
 Todo:
 Change the "gallery.php" to your needs.
 Minimum is to set the "$basedir" to the UNIX-basedir of the galleries and to set the "$htmlprefix" to the HTML-basedir of your galleries.
@@ -41,3 +44,12 @@ Where "mygallery" is the name of the folder containing the pictures.
 
 If you just want to start it put all the file in the documentroot of your webserver.
 
+## See it working
+
+at http://www.wilmie.de
+
+## License
+
+"simple_html_server" is licensed under the [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0) license. 
+It is based on BigScreen (https://github.com/bdougherty/BigScreen) which is 
+Copyright 2013 Brad Dougherty.

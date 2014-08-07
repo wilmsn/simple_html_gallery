@@ -7,19 +7,20 @@ body { background-color:#aaaaaa }
 <link rel="stylesheet" type="text/css" href="/css/gallery.css">
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="js/screenfull.min.js"></script> 
 
 <script type="text/javascript">
 
 $(document).ready(function(){
-  showgallery('pictures');
+  showgallery('demo');
 }); 
 
 function showgallery(mygallery) {
-  $.get('/gallery.php',{dir: mygallery}, function(data) { 
-     $('#content').hide();
-     $('#content').html(data); 
-     $('#content').show();
-});
+	$.get('/gallery.php',{dir: mygallery}, function(data) { 
+		$('#content').hide();
+		$('#content').html(data); 
+		$('#content').show();
+	});
 }
 
 

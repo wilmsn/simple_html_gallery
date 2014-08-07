@@ -1,35 +1,52 @@
 <?php
+###################################################################################
 #
 # Change this part to your individual configuration
 #
-$exclude_list = array(".", "..", "text.txt");
-# "dir" will contain the gallery
-$mygallery=$_GET["dir"];
-# this is the unix basedir of all the galleries
-$basedir="/var/www/bilder/";
+# this is the document root of your webserver
+$basedir="/netz/web/www_probe";   # No slash "/" at the back !!!!!
 # the dir of the galleries as seen from the werbserver
-$htmlprefix="/bilder/";
+$htmlprefix="/pictures";  		  # No slash "/" at the back !!!!!
 # $mytext contains the headline from the file "text.txt"
-$mytext = file_get_contents("$basedir$mygallery/text.txt");
+$textfile="text.txt";
 #
-# No configuration below this
+# Config labels here
+$label_help_box="Hilfe zum Fotoalbum";
 #
-?>
+# Config icons here
+#
+$icon_help="/img/info_rd_40x40.png";
+$icon_close="/img/close_gr_20x20.png";
+$icon_empty="/img/empty_rd_80x60.png";
+#
+# exclude all the files that are no pictures !!!!!
+$exclude_list = array(".", "..", "text.txt");
+# parameter "dir" will contain the gallery
+$mygallery=$_GET["dir"];
+#
+# No configuration below 
+#
+###################################################################################
 
-<script type="text/javascript">
-bilder = new Array(
-<?php
-$myfiles = array_diff(scandir("$basedir$mygallery"), $exclude_list);
+$mytext = file_get_contents($basedir.$htmlprefix."/".$mygallery."/".$textfile);
+
+echo "<script type=\"text/javascript\">\n",
+	 "bilder = new Array(\n";
+
+$myfiles = array_diff(scandir($basedir.$htmlprefix."/".$mygallery), $exclude_list);
 $i=0;
 foreach($myfiles as $thisfile) {
    if ( $i > 0) { echo ","; }
-   echo "'$htmlprefix$mygallery/$thisfile' ";
+   echo "'".$htmlprefix."/".$mygallery."/".$thisfile."' \n";
    $i++;
 }
+echo ");\n",
+     "var headline='<center>".$mytext."</center>'; \n",
+	 "var img_help='<img src=".$icon_help.">'; \n",
+	 "var img_close='<img src=".$icon_close.">'; \n",
+	 "var icon_empty='".$icon_empty."'; \n",
+	 "var label_help_box='".$label_help_box."'; \n";
 ?>
-
-);
-<?php echo "var headline='<center>$mytext</center>'; "; ?>
 var aktbildno=0;
 var aktbild = bilder[aktbildno];
 
@@ -37,8 +54,10 @@ var aktbild = bilder[aktbildno];
 //	$('head').append("<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'>");
 //}
 $(function () {
+	$('#help').html(img_help);
+	$('#help_box_head_text').html(label_help_box);
+	$('#help_box_close').html(img_close);
 	$('#bs_gallerywrapper').hide();
-	$('#help').html('<img src=/img/ask.png width=40 height=40>');
 	$('#help_box').hide();
 	$('#ovl_left').click(function() {
 		prevpic();
@@ -115,15 +134,15 @@ function showpic(){
 		$('#ctl_l').html('<img src=' + bilder[aktbildno-1] + buf_dim + style_small + ' >');
 		$('#bs_ctl_l').html('<img src=' + bilder[aktbildno-1] + bs_buf_dim + style_small + ' >');
 	} else {
-		$('#ctl_l').html('<img src=/img/stop.png' + buf_dim + style_small + ' >');
-		$('#bs_ctl_l').html('<img src=/img/stop.png' + bs_buf_dim + style_small + ' >');
+		$('#ctl_l').html('<img src=' + icon_empty + buf_dim + style_small + ' >');
+		$('#bs_ctl_l').html('<img src=' + icon_empty + bs_buf_dim + style_small + ' >');
 	}
 	if (aktbildno < bilder.length -1) {
 		$('#ctl_r').html('<img src=' + bilder[aktbildno+1] + buf_dim + style_small + ' >');
 		$('#bs_ctl_r').html('<img src=' + bilder[aktbildno+1] + bs_buf_dim + style_small + ' >');
 	} else {
-		$('#ctl_r').html('<img src=/img/stop.png' + buf_dim + style_small + ' >');
-		$('#bs_ctl_r').html('<img src=/img/stop.png' + bs_buf_dim + style_small + ' >');
+		$('#ctl_r').html('<img src=' + icon_empty + buf_dim + style_small + ' >');
+		$('#bs_ctl_r').html('<img src=' + icon_empty + bs_buf_dim + style_small + ' >');
 	}  
 	$('#galleryhead').html(headline);
 }
@@ -150,13 +169,13 @@ function gethelp(mypage) {
 				<div id=help></div>
 			</div>	
 		</div>
-				<div id=help_box class=help_box>
-				    <div id=help_box_head class=help_box_head>Hilfe zum Fotoalbum
-						<div id=help_box_close class=help_box_close><img src=/img/close1.png></div>
-                    </div> 
-					<div id=help_box_text class=help_box_text>
-					</div>
-				</div>	
+		<div id=help_box class=help_box>
+		    <div id=help_box_head class=help_box_head>
+				<div id=help_box_head_text></div>
+				<div id=help_box_close class=help_box_close></div>
+			</div> 
+			<div id=help_box_text class=help_box_text></div>
+		</div>	
 		<div id=bs_gallerywrapper>
 			<div id=bs_ctl_l></div>
 			<div id=bs_pic></div>

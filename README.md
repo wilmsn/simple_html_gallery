@@ -10,17 +10,24 @@ Feel free to use this gallery for your homepage.
 - let the script generate the rest for you!
 - implement it in your homepage and load it via javascript (ajax)
 
+## Screenshots
+![alt text](https://raw.githubusercontent.com/wilmsn/simple_html_gallery/master/screenshot1.jpg "Screenshot 1")
+![alt text](https://raw.githubusercontent.com/wilmsn/simple_html_gallery/master/screenshot2.jpg "Screenshot 2")
+
+
 ## Basic requirements:
 - a server with PHP installed and useable inside the webserver
 
 - only one basedirectory for all your galleries
 - one subdirectory for every gallery
+
 Like this:
+```
    /gallery/base/dir/gallery1
    /gallery/base/dir/gallery2
    ...
    /gallery/base/dir/galleryN
-
+```
 ## Install it:
 The easy way: 
 - Just put all the files in the root of your webserver.

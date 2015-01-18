@@ -1,0 +1,644 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+	<link rel='stylesheet' type='text/css' href='/css/styles.css'>
+    <link rel="stylesheet" href="/css/themes/wilmie.min.css" />
+    <link rel="stylesheet" href="/css/themes/jquery.mobile.icons-1.4.2.min.css" />
+    <link rel="stylesheet" href="/css/jquery.mobile.structure-1.4.2.min.css" /> 
+    <script src="/js/jquery-2.1.3.min.js"></script> 
+    <script src="/js/screenfull.min.js"></script> 
+    <script src="/js/jquery.mobile-1.4.2.min.js"></script> 
+	
+
+<style>
+#gallerywrapper {
+	position: relative;
+    background-color:#aaaaaa; 
+	width: 820px;
+	height: 540px;
+	margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:	10px;
+	z-index: 5;
+}
+#picturewrapper {
+	position: relative;
+	width: 820px;
+	height: 470px;
+	margin: 0px auto;
+	z-index: 6;
+}
+#galleryhead {
+	position:relative;
+	width:680px;
+	min-height:30px;
+	margin:0px auto;
+	z-index=5;
+	font-family: Arial; 
+	font-size:130%; 
+	color:#ffff00;
+}
+#div_l {
+	position:absolute; 
+	float:left;
+	top:195px; 
+    left:5px;  
+	height:60px;  
+	width:80px;  
+	z-index:15;
+}	
+#div_r {
+	float:left;
+	position:absolute; 
+	top:195px; 
+	left:725px;  
+	height:60px;  
+	width:80px;  
+	z-index:15;
+}	
+#div_c {
+	position:absolute;
+	float:left; 
+	top:0px;   
+	left:100px; 
+	height:470px; 
+	width:620px; 
+	z-index:10;
+}	
+#ovl_left {
+	position:absolute; 
+	top:0px; 
+	left:0px; 
+	height:100%; 
+	width:33%; 
+	z-index:30; 
+	cursor:pointer;
+}
+#ovl_right {
+	position:absolute; 
+	top:0px; 
+	left:67%; 
+	height:100%; 
+	width:33%; 
+	z-index:30; 
+	cursor:pointer;
+}
+#ovl_center {
+	position:absolute;
+	top:0px; 
+	left:33%; 
+	height:100%; 
+	width:34%; 
+	z-index:30; 
+	cursor:move;
+}
+#bs_gallerywrapper {
+	position: relative;
+	background-color:black;
+}
+#bs_div_l {
+	position:absolute; 
+	left:0%;
+	height:100%; 
+	z-index:20;
+}
+#bs_div_r {
+	position:absolute; 
+/*	left:85%; */
+	height:100%; 
+	z-index:20;
+}
+#bs_div_c {
+	position:absolute;
+/*	left:15%;  */ 
+	top:0px;   
+/*	left:10px; */ 
+	z-index:10;
+}	
+#bs_ovl_left {
+	position:absolute; 
+	top:0px; 
+	left:0px; 
+	height:100%; 
+	width:33%; 
+	z-index:30; 
+	cursor:pointer;
+}
+#bs_ovl_right {
+	position:absolute; 
+	top:0px; 
+	left:67%; 
+	height:100%; 
+	width:33%; 
+	z-index:30; 
+	cursor:pointer;
+}
+#bs_ovl_center {
+	position:absolute; 
+	top:0px; 
+	left:33%; 
+	height:100%; 
+	width:34%; 
+	z-index:30; 
+	cursor:move;
+}
+
+#setup {
+	position:absolute; 
+	top:430px; 
+	left:750px; 
+	height:80px; 
+	width:80px; 
+	z-index:40; 
+	cursor:pointer;
+}
+#setup_box {
+	position:absolute; 
+	top:100px; 
+	left:250px; 
+	height:400px; 
+	width:420px; 
+	margin: 0px auto;
+	cursor:pointer;
+}
+#setup_box_head {
+	width:400px;
+	height:27px;
+}
+#help {
+	position:absolute; 
+	top:430px; 
+	left:0px; 
+	height:80px; 
+	width:80px; 
+	z-index:40; 
+	cursor:help;
+}
+#help_box {
+	position:absolute; 
+	top: 0px; 
+	left:-50px; 
+	height:500px; 
+	width:920px; 
+	cursor:help;
+}
+#help_box_head {
+	width:900px;
+	height:27px;
+}
+.box{
+	z-index:40; 
+	border-width:5px;
+	border-style:solid;
+	border-color:grey;
+	background-color:#cccccc;
+}
+.box_head{
+	position:relative; 
+	background-color:#a80329;
+	z-index:40; 
+	font-family: Arial; 
+	font-size:120%; 
+	color:#ffffff;
+	padding-left:20px;
+}
+.box_close{
+	position:absolute;
+	margin:3px;
+	top:0px; 
+	right:0px; 
+	z-index:45; 
+	cursor:pointer;
+}
+.box_text{
+	position:relative; 
+	z-index:40; 
+	padding:10px;
+}
+.pic_big {
+	height:450px;  
+	width:600px;  
+    border:10px solid #fff; 
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px; 
+    -webkit-box-shadow: 0 0 2px #999; 
+    -moz-box-shadow: 0 0 2px #999; 
+    box-shadow: 0 0 2px #999;
+}	
+.pic_small {
+	height:60px;  
+	width:80px;  
+    border:5px solid #fff; 
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px; 
+    -webkit-box-shadow: 0 0 2px #999; 
+    -moz-box-shadow: 0 0 2px #999; 
+    box-shadow: 0 0 2px #999;    
+}
+.bs_pic_big {
+    border:10px solid #fff; 
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px; 
+    -webkit-box-shadow: 0 0 2px #999; 
+    -moz-box-shadow: 0 0 2px #999; 
+    box-shadow: 0 0 2px #999;
+}	
+.bs_pic_small {
+    border:5px solid #fff; 
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px; 
+    -webkit-box-shadow: 0 0 2px #999; 
+    -moz-box-shadow: 0 0 2px #999; 
+    box-shadow: 0 0 2px #999;    
+}
+</style>
+
+<script type='text/javascript'>
+var bilder = new Array(
+     'natur001.jpg'
+    ,'natur003.jpg'
+    ,'natur005.jpg'
+    ,'natur007.jpg'
+    ,'natur009.jpg'
+    ,'natur011.jpg'
+    ,'natur013.jpg'
+    ,'natur015.jpg'
+    ,'natur017.jpg'
+    ,'natur019.jpg'
+);
+var bilder_path='/bilder/natur';
+var pic_l_dw=520;
+var pic_l_dh=390;
+var div_l_dt=190;
+var div_l_dl=100;
+var pic_r_dw=520;
+var pic_r_dh=390;
+var div_r_dt=190;
+var div_r_dl=620;
+var bs_pic_big_x = (screen.height * 4 / 3) - 20;
+var bs_pic_big_y = screen.height - 20;
+var bs_pic_small_x = (screen.width - bs_pic_big_x - 40) / 2;
+var bs_pic_small_y = bs_pic_small_x * 3 / 4; 
+var bs_pic_l_dw=bs_pic_big_x - bs_pic_small_x;
+var bs_pic_l_dh=bs_pic_big_y - bs_pic_small_y;
+var bs_div_t=screen.height / 2 - 25;
+var bs_div_l_dt=screen.height / 2 - 30;
+var bs_div_l_dl=bs_pic_small_x + 15;
+var bs_pic_r_dw=bs_pic_big_x - bs_pic_small_x;
+var bs_pic_r_dh=bs_pic_big_y - bs_pic_small_y;
+var bs_div_r_dt=screen.height / 2 - 30;
+var bs_div_r_dl=bs_pic_big_x + 15;
+var slideanimation=true;      // can be true or false
+var animate_time=1000;        // time in ms
+var slideshow=true;           // can be true or false
+var slideshowdirforward=true; // can be true or false
+var slideshowinterval=5000;   // default interval in ms
+var slideshowstop=false;
+var mytimer;
+var headline='<center>Natur und Landschaft</center>';
+var icon_empty='/img/empty_rd_80x60.png';
+var label_help_box='Hilfe zum Fotoalbum';
+var img_help='<img src=/img/info_rd_40x40.png>';
+var img_close='<img src=/img/close_gr_20x20.png>';
+var img_setup='<img src=/img/setup.png>';
+var icon_empty='/img/empty_rd_80x60.png';
+var label_help_box='Hilfe zum Fotoalbum';
+var aktbildno=0;
+var aktbildno_last=0;
+var pic1_ready=true;
+var pic2_ready=true;
+var pic3_ready=true;
+var timer_ecec=false;
+
+$(function () {
+	$('#setup_box').hide();
+	$('#help_box').hide();
+    $('#div_l').html('<img id=pic_l class=pic_small src=' + icon_empty + ' >');
+	$('#div_c').html('<img id=pic_c class=pic_big src=' + choosepic(aktbildno) + '>');
+    $('#div_r').html('<img id=pic_r class=pic_small src=' + choosepic(aktbildno+1) + ' >');
+    $('#bs_div_l').html('<img id=bs_pic_l class=bs_pic_small src=' + icon_empty + ' >');
+	$('#bs_div_l').css('top',bs_div_t);
+	$('#bs_pic_l').prop('width', bs_pic_small_x);
+	$('#bs_pic_l').prop('height', bs_pic_small_y);
+	$('#bs_div_c').html('<img id=bs_pic_c class=bs_pic_big src=' + choosepic(aktbildno) + '>');
+	$('#bs_div_c').css('left', bs_pic_small_x +10);
+	$('#bs_pic_c').prop('width', bs_pic_big_x);
+	$('#bs_pic_c').prop('height', bs_pic_big_y);
+    $('#bs_div_r').html('<img id=bs_pic_r class=bs_pic_small src=' + choosepic(aktbildno+1) + ' >');
+	$('#bs_div_r').css('top',bs_div_t);
+	$('#bs_pic_r').prop('width', bs_pic_small_x);
+	$('#bs_pic_r').prop('height', bs_pic_small_y);
+	$('#bs_div_r').css('left', bs_pic_small_x + 30 + bs_pic_big_x);
+    $('#galleryhead').html(headline);
+	$('#setup').html(img_setup);
+	$('#setup_box_close').html(img_close);
+	$('#help').html(img_help);
+	$('#help_box_head_text').html(label_help_box);
+	$('#help_box_close').html(img_close);
+	$('#dia_on').val('on');
+	$('#anim_on').val('on');
+//	$('#set_interval').attr('value','14');
+	$('#bs_gallerywrapper').hide();
+//	mytimerfunc();
+    $('#ovl_left').click(function() {
+		stopdiashow();
+        prevpic();    
+    });
+    $('#ovl_right').click(function() {
+		stopdiashow();
+        nextpic();
+    });
+	$('#ovl_center').click(function () {
+		$('#bs_gallerywrapper').show();
+		$('#bs_div_l').css('top', bs_div_t);
+		$('#bs_div_r').css('top', bs_div_t);
+		screenfull.request($('#bs_gallerywrapper')[0]);
+	});
+	$('#help').click(function() {
+	    slideshowstop=true;
+		$('#help_box').show();
+		gethelp('/help/help_gallery.html');
+	});
+	$('#help_box_close').click(function() {
+	    slideshowstop=false;
+		$('#help_box').hide();
+	});
+	$('#setup').click(function() {
+	    slideshowstop=true;
+		$('#dia_on').slider('refresh');
+		$('#anim_on').slider('refresh');
+		$('#set_interval').slider('refresh');
+		$('#setup_box').show();
+	});
+	$('#setup_box_close').click(function() {
+	    slideshowstop=false;
+		changepic();
+		clearTimeout(mytimer);
+		slideshowinterval=$('#set_interval').val()*1000;
+		mytimerfunc();
+		if ($('#dia_on').val() == 'on') { slideshow='y'; } else { slideshow='n'; }		
+		slideanimation = ($('#anim_on').val() == 'on');		
+		$('#setup_box').hide();
+	});
+	$('#bs_ovl_left').click(function() {
+		stopdiashow();
+		prevpic();
+	});
+	$('#bs_ovl_right').click(function() {
+		stopdiashow();
+		nextpic();
+	});
+	$('#bs_ovl_center').click(function () {
+		screenfull.exit();
+		$('#bs_gallerywrapper').hide();
+	});
+	document.addEventListener(screenfull.raw.fullscreenchange, function () {
+		if (screenfull.isFullscreen) {
+			$('#bs_gallerywrapper').show();
+		} else {
+			$('#picturewrapper').show();
+			$('#bs_gallerywrapper').hide();
+		}
+		changepic();
+	});
+    changepic();
+});
+
+function stopdiashow() {
+	clearTimeout(mytimer);
+	$('#dia_on').val('off');
+
+}
+function mytimerfunc() {
+//	alert ('test '+pic1_ready +' ' + pic2_ready +' '+ pic3_ready);
+    if ( pic1_ready && pic2_ready && pic3_ready && ! timer_ecec ) {
+//		alert ('test: Drin!');
+		timer_ecec=true;
+		mytimer = setTimeout(function(){
+			if ( slideshow && ! slideshowstop ) {
+				if (slideshowdirforward) {
+					nextpic();
+					if (aktbildno == bilder.length -1) slideshowdirforward = false;
+				} else {
+					prevpic();
+					if (aktbildno == 0) slideshowdirforward = true;
+				}
+			}
+			timer_ecec=false;
+ //       mytimerfunc();
+		}, slideshowinterval);
+		pic1_ready=false;
+		pic2_ready=false;
+		pic3_ready=false;
+	}
+}
+
+function nextpic(){
+    if (aktbildno < bilder.length -1) {
+        aktbildno++;
+    }
+    showpic();
+}
+
+function prevpic(){
+    if ( aktbildno > 0 ) {
+        aktbildno--;
+    }
+    showpic();
+}
+
+function showpic(){
+	if (screenfull.isFullscreen) {     // Big Screen 
+		if (aktbildno_last < aktbildno) {
+			if ( slideanimation ) {
+				$("#bs_div_r").animate({top: '-='+bs_div_r_dt, left: '-='+bs_div_r_dl}, animate_time)
+					.animate({top: '+='+bs_div_r_dt, left: '+='+bs_div_r_dl}, 0, function(){
+							$("#bs_pic_r").animate({height: '-='+bs_pic_r_dh, width: '-='+bs_pic_r_dw}, 0, function(){$("#bs_pic_r").hide();}); 
+							changepic();
+					});
+				$("#bs_pic_r").animate({height: '+='+bs_pic_r_dh, width: '+='+bs_pic_r_dw}, animate_time );
+			} else {
+				changepic();
+			}
+		} else {
+			if ( slideanimation ) {
+				$("#bs_div_l").animate({top: '-='+bs_div_l_dt, left: '+='+bs_div_l_dl}, animate_time)
+					.animate({top: '+='+bs_div_l_dt, left: '-='+bs_div_l_dl}, 0, function(){
+							$("#bs_pic_l").animate({height: '-='+bs_pic_l_dh, width: '-='+bs_pic_l_dw}, 0, function(){$("#bs_pic_r").hide();});  
+							changepic();
+					});
+				$("#bs_pic_l").animate({height: '+='+bs_pic_l_dh, width: '+='+bs_pic_l_dw}, animate_time );
+			} else {
+				changepic();
+			}
+		}
+	} else {      // Normal Screen
+		if (aktbildno_last < aktbildno) {
+			if ( slideanimation ) {
+				$("#div_r").animate({top: '-='+div_r_dt, left: '-='+div_r_dl}, animate_time)
+					.animate({top: '+='+div_r_dt, left: '+='+div_r_dl}, 0, function(){
+							$("#pic_r").animate({height: '-='+pic_r_dh, width: '-='+pic_r_dw}, 0, function(){$("#pic_r").hide();}); 
+							changepic();
+					});
+				$("#pic_r").animate({height: '+='+pic_r_dh, width: '+='+pic_r_dw}, animate_time );
+			} else {
+				changepic();
+			}
+		} else {
+			if ( slideanimation ) {
+				$("#div_l").animate({top: '-='+div_l_dt, left: '+='+div_l_dl}, animate_time)
+					.animate({top: '+='+div_l_dt, left: '-='+div_l_dl}, 0, function(){
+							$("#pic_l").animate({height: '-='+pic_l_dh, width: '-='+pic_l_dw}, 0, function(){$("#pic_r").hide();});  
+							changepic();
+					});
+				$("#pic_l").animate({height: '+='+pic_l_dh, width: '+='+pic_l_dw}, animate_time );
+			} else {
+				changepic();
+			}
+		}
+	}
+}
+
+function changepic() {
+    var pic_item_l;
+    var pic_item_c;
+    var pic_item_r;
+	
+	if (screenfull.isFullscreen) {
+		pic_item_l = '#bs_pic_l';
+		pic_item_c = '#bs_pic_c';
+		pic_item_r = '#bs_pic_r';
+	} else {
+		pic_item_l = '#pic_l';
+		pic_item_c = '#pic_c';
+		pic_item_r = '#pic_r';
+	} 	
+    $(pic_item_c).hide();
+    $(pic_item_c).attr('src',  choosepic(aktbildno) ).load(function(){
+		pic2_ready=true;
+		mytimerfunc();
+	});
+    $(pic_item_c).show();
+    if (aktbildno > 0) {
+        $(pic_item_l).attr('src',  choosepic(aktbildno-1)).load(function(){
+			$(pic_item_l).show();
+			pic1_ready=true;
+			mytimerfunc();
+		});
+    } else {
+        $(pic_item_l).attr('src', icon_empty ).load(function(){
+			$(pic_item_l).show();
+			pic1_ready=true;
+			mytimerfunc();
+		});
+    }
+    if (aktbildno < bilder.length -1) {
+        $(pic_item_r).attr('src',  choosepic(aktbildno+1)).load(function(){
+			$(pic_item_r).show(); 
+			pic3_ready=true;
+			mytimerfunc();
+		});
+    } else {
+        $(pic_item_r).attr('src', icon_empty ).load(function(){
+			$(pic_item_r).show();
+			pic3_ready=true;
+			mytimerfunc();
+		});
+	}
+	aktbildno_last = aktbildno;
+}
+
+function gethelp(mypage) {
+	$.get(mypage, function(data) {
+		$('#help_box_text').hide();
+		$('#help_box_text').html(data);
+		$('#help_box_text').show();
+	});
+}
+
+function choosepic(aktbildno) {
+	var resolution;
+	if ( $('#pic_qual_l').is(':checked') ) { resolution = '/l/'; }
+	if ( $('#pic_qual_m').is(':checked') ) { resolution = '/m/'; }
+	if ( $('#pic_qual_s').is(':checked') ) { resolution = '/s/'; }
+	return bilder_path + resolution + bilder[aktbildno];
+}
+
+</script>
+
+<html>
+	<body>
+		<div id=gallerywrapper>
+			<div id=galleryhead></div>
+            <div id=picturewrapper>
+				<div id=div_l></div>
+				<div id=div_c></div>
+				<div id=div_r></div>
+				<div id=ovl_left></div>
+				<div id=ovl_center></div>
+				<div id=ovl_right></div>
+				<div id=help></div>
+				<div id=setup></div>
+			</div>	
+			<div id=help_box class=box>
+				<div id=help_box_head class=box_head>
+					<div id=help_box_head_text></div>
+					<div id=help_box_close class=box_close></div>
+				</div> 
+				<div id=help_box_text class=box_text></div>
+			</div>	
+			<div id=setup_box class=box>
+				<div id=setup_box_head class=box_head>
+					<div id=setup_box_head_text></div>
+					<div id=setup_box_close class=box_close>
+					</div>
+				</div> 
+				<div id=box_text class=box_text>
+					<table border=0><tr>
+					<td><label for="dia_on">Dia Show:</label></td><td><label for="anim_on">Animation:</label></td></tr>
+					<tr><td>
+					<select name="dia_on" id="dia_on" data-role="slider"  data-theme="b">
+						<option value="off">Aus</option>
+						<option value="on">Ein</option>
+					</select>
+					</td><td>
+					<select name="anim_on" id="anim_on" data-role="slider"  data-theme="b">
+						<option value="off">Aus</option>
+						<option value="on">Ein</option>
+					</select>	
+					</td></tr>
+					<tr><td>						
+						<fieldset data-role="controlgroup">
+							<legend>Bildqualität:</legend>
+						</td><td>	
+							<input type="radio" name="pic_qual" id="pic_qual_l" value="l" />
+								<label for="pic_qual_l">Hoch</label>
+							<input type="radio" name="pic_qual" id="pic_qual_m" value="m" checked="checked" />
+								<label for="pic_qual_m">Normal</label>
+							<input type="radio" name="pic_qual" id="pic_qual_s" value="s"" />
+								<label for="pic_qual_s">Gering</label>
+						</fieldset>
+
+					</td></tr>
+					<tr><td colspan=2>
+					<label for="set_interval">Abstand zwischen den Bildern in Sekunden:</label>
+					<input type="range" name="set_interval" id="set_interval" value="5" min="1" max="30" data-theme="b" data-track-theme="b" data-highlight="true" />
+					</td></tr></table>
+				</div>
+			</div>	
+		</div>
+		<div id=bs_gallerywrapper>
+			<div id=bs_div_l></div>
+			<div id=bs_div_c></div>
+			<div id=bs_div_r></div>
+			<div id=bs_ovl_left></div>
+			<div id=bs_ovl_center></div>
+			<div id=bs_ovl_right></div>
+		</div>	
+	</body>
+</html>	
